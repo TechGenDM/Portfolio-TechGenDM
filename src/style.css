@@ -1,0 +1,365 @@
+:root {
+  --bg-color: #fcfcfc;
+  --text-main: #111111;
+  --text-muted: #666666;
+  --overlay-bg: #000000;
+  --overlay-text: #ffffff;
+  
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  
+  --padding-section: 15vh 5vw;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Base Layout */
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Nav */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.menu-btn {
+  pointer-events: auto;
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-main);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  z-index: 101;
+}
+
+/* Switch Menu button color on overlay active */
+.menu-btn.nav-open {
+  color: var(--overlay-text);
+}
+
+/* Nav Overlay */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--overlay-bg);
+  color: var(--overlay-text);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.nav-overlay.active {
+  transform: translateY(0);
+}
+
+.nav-overlay ul {
+  list-style: none;
+  text-align: center;
+}
+
+.nav-overlay li {
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.nav-overlay a {
+  color: var(--overlay-text);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  display: inline-block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-overlay a:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--padding-section);
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 9vw, 10rem);
+  max-width: 1400px;
+  margin: 0 auto;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+/* Section styling for scrolling experience */
+section {
+  padding: 20vh 5vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content-wrapper h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.03em;
+}
+
+.content-wrapper p {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  color: var(--text-muted);
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1.5rem;
+  }
+}
+
+/* Smooth Scroll overrides for Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal-up.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay for staggering */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* Project Grid layout */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: var(--text-main);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.project-img-wrapper {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 1;
+}
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.learn-more {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Hover States */
+.project-card:hover .project-img {
+  transform: scale(1.05);
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-card:hover .learn-more {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* --- Phase 3 Animations --- */
+
+/* Interactive SVG */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.hero-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Remove translate from here since GSAP animates x/y, we'll use margin or proper positioning */
+  margin-top: -40vmin;
+  margin-left: -40vmin;
+  width: 80vmin;
+  height: 80vmin;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.svg-circle, .svg-path {
+  stroke: var(--text-main);
+  stroke-width: 2px;
+  transition: stroke 0.8s;
+}
+.svg-dot {
+  fill: var(--text-main);
+  transition: fill 0.8s;
+}
+
+/* Skills Train */
+.skills-section {
+  padding: 15vh 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.skills-track {
+  display: flex;
+  gap: 6rem;
+  white-space: nowrap;
+  padding: 0 5vw;
+}
+
+.skill-item {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text-main);
+  text-transform: uppercase;
+  transition: -webkit-text-stroke 0.8s;
+}
+
+.skill-item:hover {
+  color: var(--text-main);
+}
+
+

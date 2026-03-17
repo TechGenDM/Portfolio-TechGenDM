@@ -33,9 +33,12 @@ document.querySelector('#app').innerHTML = `
       </svg>
       <div class="hero-content">
         <h1 class="hero-title">
-          <span class="line-mask"><span class="line-text">Great Design.</span></span>
-          <span class="line-mask"><span class="line-text">No Nonsense.</span></span>
+          <span class="line-mask"><span class="line-text">Devasish</span></span>
+          <span class="line-mask"><span class="line-text">Mishra.</span></span>
         </h1>
+        <div class="line-mask">
+          <h2 class="line-text hero-subtitle">Full Stack Web Developer | ML & Data Science Explorer</h2>
+        </div>
       </div>
     </section>
 
@@ -92,25 +95,136 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <!-- Floating Skills Grid -->
+    <!-- Skills Section: Marquee + Grid -->
     <section id="skills" class="skills-section theme-transition" data-theme="light">
+      
+      <!-- Velocity Marquee -->
+      <div class="skills-track">
+        <div class="skill-item">DATA SCIENCE</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">LARGE LANGUAGE MODELS</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">RAG</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">FULL STACK</div>
+        <div class="skill-item">—</div>
+        <!-- Duplicated for infinite scroll illusion -->
+        <div class="skill-item">DATA SCIENCE</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">LARGE LANGUAGE MODELS</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">RAG</div>
+        <div class="skill-item">—</div>
+        <div class="skill-item">FULL STACK</div>
+        <div class="skill-item">—</div>
+      </div>
+
+      <!-- Categorized Skills Grid -->
       <div class="content-wrapper">
-        <h2 class="reveal-up">Skills</h2>
-        <div class="skills-grid reveal-up delay-1">
-          <div class="skill-card float-1">React</div>
-          <div class="skill-card float-2">Node.js</div>
-          <div class="skill-card float-3">AI / ML</div>
-          <div class="skill-card float-2">MongoDB</div>
-          <div class="skill-card float-1">GSAP</div>
-          <div class="skill-card float-3">WebGL</div>
+        <div class="categorized-skills">
+          <div class="skill-category reveal-up delay-1">
+            <h3>Frontend</h3>
+            <ul>
+              <li>React.js</li>
+              <li>Next.js</li>
+              <li>TypeScript</li>
+            </ul>
+          </div>
+          
+          <div class="skill-category reveal-up delay-2">
+            <h3>Backend</h3>
+            <ul>
+              <li>Node.js</li>
+              <li>Express.js</li>
+              <li>Flask</li>
+              <li>MongoDB</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+
+          <div class="skill-category reveal-up delay-3">
+            <h3>AI & ML</h3>
+            <ul>
+              <li>Model Development</li>
+              <li>Evaluation</li>
+              <li>Applied ML Systems</li>
+              <li>Python</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Experience -->
+    <section id="education" class="theme-transition" data-theme="light">
+      <div class="content-wrapper">
+        <h2 class="reveal-up">Experience & Education</h2>
+        <div class="timeline mt-2">
+          <div class="timeline-item reveal-right delay-1">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Scaler School of Technology</h3>
+              <h4>Computer Science & Artificial Intelligence</h4>
+              <p class="timeline-date">July 2025 - July 2029</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-right delay-2">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>BITS Pilani</h3>
+              <h4>Bachelor's in Computer Science</h4>
+              <p class="timeline-date">July 2025 - July 2028</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-right delay-3">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>GDG Member (Google Developer Group)</h3>
+              <h4>Member</h4>
+              <p class="timeline-date">January 2025 - Present</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-right delay-4">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Telelink Communication</h3>
+              <h4>Sales And Marketing Associate</h4>
+              <p class="timeline-date">January 2016 - July 2025</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honors & Awards -->
+    <section id="awards" class="theme-transition" data-theme="dark">
+      <div class="content-wrapper">
+        <h2 class="reveal-up">Honors & Awards</h2>
+        <div class="awards-list">
+          <div class="award-row reveal-up delay-1">
+            <h3>Airtel Young Achievements Award</h3>
+          </div>
+          <div class="award-row reveal-up delay-2">
+            <h3>MATHS Excellence Award 2015</h3>
+          </div>
+          <div class="award-row reveal-up delay-3">
+            <h3>10th Topper</h3>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="about" class="theme-transition" data-theme="dark">
       <div class="content-wrapper">
-        <h2 class="reveal-up">About</h2>
-        <p class="reveal-up delay-1">Minimalism is not about taking things away. It's about bringing the right things into focus. We remove the noise so the message can speak.</p>
+        <div class="about-grid">
+          <div class="about-text">
+            <h2 class="reveal-up">About Me</h2>
+            <p class="reveal-up delay-1">I am a Full Stack Web Developer with a strong interest in Machine Learning, Large Language Models (LLMs), and Data Science. Beyond technical development, I bring strong leadership and execution skills developed through serving as Head Boy & President of Departments for multiple years and over 9 years of Sales & Marketing experience. I thrive in high-pressure and responsibility-driven environments.</p>
+          </div>
+          <div class="about-image-wrapper reveal-up delay-2">
+            <img class="about-image portrait-bw" src="https://images.unsplash.com/photo-1544168190-79c15427015f?q=80&w=1000&auto=format&fit=crop" alt="Portrait Placeholder">
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -126,7 +240,7 @@ function raf(time) {
 requestAnimationFrame(raf)
 
 // Reveal observer
-const revealElements = document.querySelectorAll('.reveal-up');
+const revealElements = document.querySelectorAll('.reveal-up, .reveal-right');
 const observerOptions = {
   root: null,
   rootMargin: '0px 0px -10% 0px',
@@ -217,7 +331,47 @@ if (heroSvg) {
   });
 }
 
-// 2. Custom Cursor for Projects
+// 2. Horizontal Skills Marquee tied to scroll velocity
+const skillsTrack = document.querySelector('.skills-track');
+if (skillsTrack) {
+  let scrollSpeed = 0;
+  let lastScrollTop = 0;
+  
+  // Create a continuous movement tween
+  const trackTween = gsap.to(skillsTrack, {
+    xPercent: -50,
+    repeat: -1,
+    duration: 15,
+    ease: "none"
+  });
+
+  ScrollTrigger.create({
+    trigger: document.body,
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: (self) => {
+      // self.velocity is built into ScrollTrigger
+      // Adjust the timeScale of our continuous tween based on scroll velocity
+      let velocity = Math.abs(self.getVelocity() / 300);
+      gsap.to(trackTween, {
+        timeScale: 1 + velocity,
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: true
+      });
+      // Return to normal speed 1 after scroll stops
+      gsap.to(trackTween, {
+        timeScale: 1,
+        duration: 1.5,
+        delay: 0.5,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
+  });
+}
+
+// 3. Custom Cursor for Projects
 const customCursor = document.querySelector('.cursor-case-study');
 const projectCards = document.querySelectorAll('.project-card');
 

@@ -226,6 +226,15 @@ header {
   font-weight: 900;
 }
 
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 2rem;
+  letter-spacing: 0.02em;
+}
+
 /* Section styling for scrolling experience */
 section {
   padding: 20vh 5vw;
@@ -470,46 +479,208 @@ html.lenis, html.lenis body {
   padding: 15vh 0;
 }
 
-.skills-grid {
+/* Categorized Skills Grid */
+.categorized-skills {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  perspective: 1000px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  margin-top: 10vh;
 }
 
-.skill-card {
-  background: color-mix(in srgb, var(--text-main) 4%, transparent);
-  padding: 3rem 1.5rem;
-  border-radius: 12px;
-  text-align: center;
+.skill-category h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text-main);
+  border-bottom: 1px solid color-mix(in srgb, var(--text-main) 20%, transparent);
+  padding-bottom: 0.5rem;
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.skill-category li {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  cursor: default;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-block; /* For transform scale */
+  transform-origin: left center;
+}
+
+.skill-category li:hover {
+  color: var(--bg-color); /* Effectively hiding it by coloring it same as bg */
+  color: #aa3bff; /* Vibrant accent color */
+  transform: scale(1.05) translateX(10px);
+}
+
+@media (max-width: 1024px) {
+  .categorized-skills {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .categorized-skills {
+    grid-template-columns: 1fr;
+  }
+  .skills-section {
+    padding: 10vh 0;
+    display: block;
+  }
+}
+
+/* About Section */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.8;
+}
+
+.about-image-wrapper {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.about-image:hover {
+  transform: scale(1.03);
+}
+
+.portrait-bw {
+  filter: grayscale(100%) contrast(1.2);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Reveal Right Animation */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.delay-4 { transition-delay: 0.4s; }
+
+/* Timeline */
+.timeline {
+  margin-top: 4rem;
+  position: relative;
+  border-left: 2px solid color-mix(in srgb, var(--text-main) 15%, transparent);
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: calc(-3rem - 1px);
+  top: 0.5rem;
+  width: 12px;
+  height: 12px;
+  background: var(--bg-color);
+  border: 2px solid var(--text-main);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: background 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--text-main);
+}
+
+.timeline-content h3 {
   font-family: var(--font-heading);
   font-size: 1.8rem;
-  font-weight: 700;
   color: var(--text-main);
-  border: 1px solid color-mix(in srgb, var(--text-main) 10%, transparent);
-  transition: background 0.3s;
+  margin-bottom: 0.2rem;
 }
 
-.skill-card:hover {
-  background: color-mix(in srgb, var(--text-main) 8%, transparent);
+.timeline-content h4 {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
 }
 
-@keyframes float1 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-@keyframes float2 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-25px); }
-}
-@keyframes float3 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+.timeline-date {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
 }
 
-.float-1 { animation: float1 4s ease-in-out infinite; }
-.float-2 { animation: float2 5.5s ease-in-out infinite; }
-.float-3 { animation: float3 3.5s ease-in-out infinite; }
+/* Awards */
+.awards-list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.award-row {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text-main) 15%, transparent);
+  transition: padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease;
+  cursor: default;
+}
+
+.award-row:first-child {
+  border-top: 1px solid color-mix(in srgb, var(--text-main) 15%, transparent);
+}
+
+.award-row h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-main);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.award-row:hover {
+  padding-left: 2rem;
+  background: color-mix(in srgb, var(--text-main) 3%, transparent);
+}
+
+.award-row:hover h3 {
+  color: #aa3bff; /* Vibrant accent color */
+}
 
 

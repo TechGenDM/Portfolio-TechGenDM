@@ -6,19 +6,22 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 document.querySelector('#app').innerHTML = `
-  <header>
-    <button class="menu-btn" id="menuToggle">Menu</button>
+  <header class="navbar">
+    <div class="logo">Portfolio</div>
+    <button class="menu-btn" id="menuToggle"><span class="btn-text">Menu</span></button>
   </header>
 
   <nav class="nav-overlay" id="navOverlay">
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#work">Selected Works</a></li>
-      <li><a href="#skills">Capabilities</a></li>
-      <li><a href="#about">About Studio</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><div class="nav-link-wrapper"><a href="#about" data-num="01">About Me</a></div></li>
+      <li><div class="nav-link-wrapper"><a href="#work" data-num="02">My Projects</a></div></li>
+      <li><div class="nav-link-wrapper"><a href="#education" data-num="03">Education Background</a></div></li>
+      <li><div class="nav-link-wrapper"><a href="#skills" data-num="04">Skills</a></div></li>
+      <li><div class="nav-link-wrapper"><a href="#contact" data-num="05">Contact</a></div></li>
     </ul>
   </nav>
+
+  <div class="cursor-case-study">View<br>Case Study</div>
 
   <main>
     <section class="hero" id="home">
@@ -29,7 +32,10 @@ document.querySelector('#app').innerHTML = `
          <circle cx="100" cy="100" r="20" fill="var(--text-main)" class="svg-dot" />
       </svg>
       <div class="hero-content">
-        <h1 class="reveal-up hero-title">Great Design.<br>No Nonsense.</h1>
+        <h1 class="hero-title">
+          <span class="line-mask"><span class="line-text">Great Design.</span></span>
+          <span class="line-mask"><span class="line-text">No Nonsense.</span></span>
+        </h1>
       </div>
     </section>
 
@@ -86,14 +92,18 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <!-- Skills Train -->
+    <!-- Floating Skills Grid -->
     <section id="skills" class="skills-section theme-transition" data-theme="light">
-      <div class="skills-track">
-        <div class="skill-item">React / MERN</div>
-        <div class="skill-item">GSAP & Framer</div>
-        <div class="skill-item">AI / ML Integration</div>
-        <div class="skill-item">Three.js & WebGL</div>
-        <div class="skill-item">Creative Coding</div>
+      <div class="content-wrapper">
+        <h2 class="reveal-up">Skills</h2>
+        <div class="skills-grid reveal-up delay-1">
+          <div class="skill-card float-1">React</div>
+          <div class="skill-card float-2">Node.js</div>
+          <div class="skill-card float-3">AI / ML</div>
+          <div class="skill-card float-2">MongoDB</div>
+          <div class="skill-card float-1">GSAP</div>
+          <div class="skill-card float-3">WebGL</div>
+        </div>
       </div>
     </section>
 
@@ -137,18 +147,19 @@ revealElements.forEach(el => observer.observe(el));
 // Navigation interactions
 const menuToggle = document.getElementById('menuToggle');
 const navOverlay = document.getElementById('navOverlay');
+const btnText = menuToggle.querySelector('.btn-text');
 
 menuToggle.addEventListener('click', () => {
   const isOpen = navOverlay.classList.contains('active');
   
   if (isOpen) {
     navOverlay.classList.remove('active');
-    menuToggle.textContent = 'Menu';
+    btnText.textContent = 'Menu';
     menuToggle.classList.remove('nav-open');
     lenis.start(); // restore scroll
   } else {
     navOverlay.classList.add('active');
-    menuToggle.textContent = 'Close';
+    btnText.textContent = 'Close';
     menuToggle.classList.add('nav-open');
     lenis.stop(); // freeze scroll when menu is open
   }
@@ -158,13 +169,25 @@ menuToggle.addEventListener('click', () => {
 document.querySelectorAll('.nav-overlay a').forEach(link => {
   link.addEventListener('click', () => {
     navOverlay.classList.remove('active');
-    menuToggle.textContent = 'Menu';
+    btnText.textContent = 'Menu';
     menuToggle.classList.remove('nav-open');
     lenis.start();
   });
 });
 
 // --- Phase 3 Animations ---
+
+// --- Phase 4 Typography & Hero Reveal ---
+// Initial Load Animation
+window.addEventListener('load', () => {
+  gsap.to('.line-text', {
+    y: 0,
+    duration: 1.2,
+    ease: 'power4.out',
+    stagger: 0.15,
+    delay: 0.2
+  });
+});
 
 // 1. Interactive SVG Illustration Parallax
 const heroSvg = document.querySelector('.hero-svg');
@@ -194,25 +217,27 @@ if (heroSvg) {
   });
 }
 
-// 2. Horizontal Skills Train
-const skillsTrack = document.querySelector('.skills-track');
-if (skillsTrack) {
-  // Ensure the track moves enough to show all items
-  // Using a small delay to let font rendering settle before calculating scrollWidth ideally,
-  // but using a set movement based on track size works well.
-  requestAnimationFrame(() => {
-    gsap.to(skillsTrack, {
-      x: () => -(skillsTrack.scrollWidth - window.innerWidth + 100),
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".skills-section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.5
-      }
-    });
+// 2. Custom Cursor for Projects
+const customCursor = document.querySelector('.cursor-case-study');
+const projectCards = document.querySelectorAll('.project-card');
+
+// Move cursor
+window.addEventListener('mousemove', (e) => {
+  if (customCursor.classList.contains('active')) {
+    // We update left/top values for exact positioning
+    customCursor.style.left = e.clientX + 'px';
+    customCursor.style.top = e.clientY + 'px';
+  }
+});
+
+projectCards.forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    customCursor.classList.add('active');
   });
-}
+  card.addEventListener('mouseleave', () => {
+    customCursor.classList.remove('active');
+  });
+});
 
 // 3. Background Transitions
 // We change CSS variables directly on the root. The CSS handles properties seamlessly.
@@ -260,3 +285,26 @@ function setTheme(theme) {
     });
   }
 }
+
+// 4. Magnetic Menu Links
+const navLinks = document.querySelectorAll('.nav-overlay a');
+navLinks.forEach(link => {
+  link.addEventListener('mousemove', (e) => {
+    // Check if the overlay has the active class. If so, apply magnetic effect
+    if(navOverlay.classList.contains('active')) {
+      const position = link.getBoundingClientRect();
+      const x = e.pageX - position.left - position.width / 2;
+      const y = e.pageY - position.top - position.height / 2;
+      
+      // We apply x/y directly avoiding the CSS transition to make it snappier
+      link.style.transition = 'none';
+      link.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
+    }
+  });
+
+  link.addEventListener('mouseleave', () => {
+    // Reset back to normal with the CSS transition
+    link.style.transition = 'transform 0.3s ease-out';
+    link.style.transform = 'translate(0px, 0px)';
+  });
+});
